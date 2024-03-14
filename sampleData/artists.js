@@ -27,3 +27,5 @@ const artists = [
 
 
 ]
+
+module.exports = artists;
