@@ -14,6 +14,17 @@ app.get('/', (req,res)=>{
     res.send('Welcome to the music artist api')
 })
 
+//Prints all artists
+app.get('/api/artists', (req,res)=>{
+    res.json(artists)
+})
+
+//Prints all songs
+app.get('/api/songs', (req,res)=>{
+    res.json(songs)
+})
+
+
 //Create new artist
 app.post('/api/artists', (req,res) =>{
     if(req.body.name && req.body.genre){
@@ -37,16 +48,17 @@ app.post('/api/artists', (req,res) =>{
 })
 
 //Delete Artists
+app.delete((req, res, next)=> {
+    const artist = artists.find((a,i)=>{
+        if(a.id == req.params.id){
+            artists.splice(i,1)
+            return true
+        }
+    })
 
-//Prints all artists
-app.get('/api/artists', (req,res)=>{
-    res.json(artists)
+    if(artist) res.json(artist)
 })
 
-//Prints all songs
-app.get('/api/songs', (req,res)=>{
-    res.json(songs)
-})
 
 // Prints artist info by id
 app.get('/api/artists/:id', (req,res)=> {
